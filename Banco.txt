@@ -1,0 +1,212 @@
+clase publica Cliente
+    publico String nombre nuevaInstancia String()
+    publico String direccion nuevaInstancia String()
+    publico String telefono nuevaInstancia String()
+    publico Boolean aptoCredito nuevaInstancia Boolean()
+
+    metodo publico Cliente()
+        nombre = ""
+        direccion = ""
+        telefono = ""
+    fin metodo
+
+fin clase
+
+clase publica Persona heredaDe Cliente
+    publico Integer dni nuevaInstancia Integer()
+    publico Integer cuil nuevaInstancia Integer()
+    publico Float ingresoMensual nuevaInstancia Float()
+    publico Integer situacionVeraz nuevaInstancia Integer()
+
+    metodo publico Persona()
+        dni = 0
+        cuil = 0
+        ingresoMensual = 0
+        situacionVeraz = 0
+    fin metodo
+
+    metodo publico Boolean aptoCredito()
+        si situacionVeraz > 1 entonces
+            aptoCredito = falso
+        sino 
+            aptoCredito = verdadero
+        fin si
+
+        retornar: aptoCredito
+    fin metodo
+
+fin clase
+
+clase publica Empresa heredaDe Cliente
+    publico Integer cuit nuevaInstancia Integer()
+    publico Float facturacionMensual nuevaInstancia Float()
+    publico Float resultadoBalanceAnual nuevaInstancia Float()
+    publico Integer scoring nuevaInstancia Integer() // se asigna segun datos de Consultora con un indice que va de 1 a 100 puntos
+
+    metodo publico Empresa()
+        cuit = 0
+        facturacionMensual = 0
+        resultadoBalanceAnual = 0
+        scoring = 0
+    fin metodo
+    
+    metodo publico Boolean aptoCredito()
+        si scoring > 50 entonces
+            aptoCredito = verdadero
+        sino 
+            aptoCredito = falso
+        fin si
+
+        retornar: aptoCredito
+    fin metodo
+fin clase
+
+clase publica CarteraPersona 
+    publico Persona personas[50] nuevaInstancia Persona
+    privado Integer i nuevaInstancia Integer()
+    privado String finalizar nuevaInstancia String()
+    privado String nombrePersona nuevaInstancia String()
+    privado String direccionPersona nuevaInstancia String()
+    privado String telefonoPersona nuevaInstancia String()
+    privado Integer dniP nuevaInstancia Integer()
+    privado Integer cuilP nuevaInstancia Integer()
+    privado Float ingresoMensualP nuevaInstancia Float()
+    privado Integer situacionVerazP nuevaInstancia Integer()
+    
+    metodo publico CarteraPersona()
+        ingresarPersona()
+    fin metodo
+
+    metodo publico ingresarPersona()
+        finalizar = "no"
+        i = 1
+        mientras i <= 50 Y finalizar =! "si"
+            ingresar: nombrePersona
+            personas[i].nombre = nombrePersona
+            ingresar: direccionPersona
+            personas[i].direccion = direccionPersona
+            ingresar: telefonoPersona
+            personas[i].telefono = telefonoPersona
+            ingresar: dniP
+            personas[i].dni = dniP
+            ingresar: cuilP
+            personas[i].cuil = cuilP
+            ingresar: ingresoMensualP
+            personas[i].ingresoMensual = ingresoMensualP
+            ingresar: situacionVerazP
+            personas[i].situacionVeraz = situacionVerazP
+
+            si personas[i].aptoCredito() = verdadero Y personas[i].ingresoMensual > 100000,00 entonces
+                mostrar: "La persona es apta para recibir un Credito"
+            sino 
+                mostrar: "La persona NO califica para recibir un Credito"
+            fin si
+
+            mostrar:"¿Desea finalizar la carga de Clientes Personas? escriba: si, de lo contrario pulse ENTER"
+            ingresar: finalizar
+            i = i + 1
+        fin mientras
+    fin metodo
+
+    metodo publico buscarPersonaNombre(String m)
+        i = 1
+        finalizar = "no"
+        mientras i <= 50 Y finalizar =! "si" 
+            si m = personas[i].nombre entonces
+                finalizar = "si"
+                posicion = i
+            fin si
+            i = i + 1
+        fin mientras
+
+        mostrar: 
+        // muestro los tributos de la poscion del vector personas[posicion]
+
+    fin metodo
+
+    metodo publico buscarPersonaDni(Integer m)
+        i = 1
+        finalizar = "no"
+        mientras i <= 50 Y finalizar =! "si" 
+            si m = personas[i].dni entonces
+                finalizar = "si"
+                posicion = i
+            fin si
+            i = i + 1
+        fin mientras
+
+        mostrar: 
+        // muestro los tributos de la poscion del vector personas[posicion]
+
+    fin metodo
+
+
+fin clase
+
+clase publica CarteraEmpresa // realizaria una clase similar a CarteraPersona con los atributos propios
+                             // y metodos de busqueda por nombre y CUIT
+                             // los metodos serian buscarEmpresaNombre() y buscarEmpresaCuit()
+fin clase
+
+clase publica Integracion
+    privado CarteraPersona carteraP nuevaInstancia CarteraPersona()
+    privado CarteraEmpresa carteraE nuevaInstancia CarteraEmpresa()
+    privado Integer opcion nuevaInstancia Integer()
+    privado String busqueda1 nuevaInstancia String()
+    privado Integer busqueda2 nuevaInstancia Integer()
+
+    metodo publico Integracion()
+    mostrar: "Opciones"
+    mostrar: "Opcion 1: Buscar Cliente Persona"
+    mostrar: "Opcion 2: Buscar Cliente Empresa"
+    
+    ingresarOpcion()
+
+    si opcion = 1 entonces
+        mostrar: "Opcion 1: Buscar por Nombre"
+        mostrar: "Opcion 2: Buscar por DNI"
+        ingresar: opcion
+
+        si opcion = 1 entonces
+            ingresar: busqueda1
+            carteraP.buscarPersonaNombre(busqueda1)
+            sino si opcion = 2 entonces
+                ingresar: busqueda2
+                carteraP.buscarPersonaDni(busqueda2)
+            sino
+            mostrar: "La opcion elegida no es valida"
+            ingresarOpcion()
+            fin sino
+        fin si
+
+        sino si opcion = 2 entonces 
+            mostrar: "Opcion 1: Buscar por Nombre"
+            mostrar: "Opcion 2: Buscar por CUIT"
+            ingresar: opcion
+
+            si opcion = 1 entonces
+                ingresar: busqueda1
+                carteraE.buscarEmpresaNombre(busqueda1)
+                sino si opcion = 2 entonces
+                    ingresar: busqueda2    
+                    carterae.buscarEmpresaCuit(busqueda2)
+                sino
+                    mostrar: "La opcion elegida no es valida"
+                    ingresarOpcion()
+                fin sino
+            fin si
+
+        sino
+            mostrar: "La opcion elegida no es valida reintente"
+            ingresarOpcion()
+        fin sino
+    fin si
+
+    fin metodo
+
+    metodo Integer ingresarOpcion()
+        ingresar: opcion
+        retornar: opcion
+    fin metodo
+
+fin clase

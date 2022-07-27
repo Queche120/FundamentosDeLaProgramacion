@@ -1,0 +1,228 @@
+clase Color
+    String color nuevaInstancia String()
+
+    metodo definirColor(String colorN)
+        color = colorN
+    fin metodo
+
+    metodo ingresarColor()
+        ingresar: color 
+    fin metodo
+
+    metodo obtenerColor()
+        retornar: color
+    fin metodo
+
+fin clase
+
+clase Modelo
+    String modelo nuevaInstancia String()
+
+    metodo definirModelo(String nuevoModelo)
+        modelo = nuevoModelo
+    fin metodo
+
+    metodo ingresarModelo()
+        ingresar: modelo 
+    fin metodo
+
+    metodo obtenerModelo()
+        retornar: modelo
+    fin metodo
+
+fin clase
+
+clase Stock
+    Integer stock nuevaInstancia Integer()
+
+    metodo asignarStock(Integer nuevoStock)
+        stock = nuevoStock
+    fin metodo
+
+    metodo obtenerStock()
+        retornar: stock
+    fin metodo
+
+    metodo ingresarStock()
+        ingresar: stock
+    fin metodo
+
+fin clase
+
+clase Silla
+    Color colorSilla nuevaInstancia Color()
+    Modelo modeloSilla nuevaInstancia Modelo()
+    Stock stock nuevaInstancia Stock()
+
+    metodo asignoColor(Color colorNuevo)
+        colorSilla = colorNuevo
+    fin metodo
+
+    metodo obtenerColor()
+        retornar: colorSilla
+    fin metodo
+    
+    metodo asignoModelo(Modelo modeloNuevo)
+        modeloSilla = modeloNuevo
+    fin metodo
+
+    metodo obtenerModelo()
+        retornar: modeloSilla
+    fin metodo
+    
+    metodo asignoStock(Stock cant)
+        stock = cant
+    fin metodo
+
+    metodo obtengoStock()
+        retornar: stock
+    fin metodo
+
+fin clase
+
+clase Opcion 
+    Integer opcion nuevaInstancia Integer()
+
+    metodo definirOpcion()
+        ingresar: opcion
+    fin metodo
+
+    metodo obtenerOpcion()
+        retornar: opcion
+    fin metodo
+
+fin clase
+
+clase Finalizar
+
+    Boolean finalizar nuevaInstancia Boolean()
+
+    metodo definirValor(Boolean valor)
+        finalizar = valor
+    fin metodo
+
+    metodo obtenerValor()
+        retornar: finalizar 
+    fin metodo
+
+fin clase
+
+
+clase Catalogo
+    Opcion opcion nuevaInstancia Opcion()
+    Silla sillas[4] nuevaInstancia Silla()
+    
+    metodo Catalogo()
+
+        mostrar: "Catalogo de Sillas"
+        mostrar: "------------------"
+        mostrar: "Menu de opciones"
+        mostrar: "1- Ingresar Silla"
+        mostrar: "2- Busqueda de stock por Modelo y Color"
+
+        opcion.definirOpcion()
+
+        si opcion.obtenerOpcion() = 1 entonces
+            creoSillas()
+        sino si opcion.obtenerOpcion() = 2 entonces
+            mostrar: "El Stock del modelo y color seleccionado es " + buscoSillas()    
+        sino
+            mostrar: "La opcion elegida no es valida"
+        fin si
+
+    fin metodo
+
+metodo creoSillas()
+    Modelo modeloNuevo nuevaInstancia Modelo()
+    Opcion nuevaOpcion nuevaInstancia Opcion()
+    Stock nuevoStock nuevaInstancia Stock()
+    Integer i nuevaInstancia Integer()
+    Finalizar finalizacion nuevaInstancia Finalizar()
+    
+    finalizacion.definirValor(falso)
+
+    i = 1 
+    mientras i < 5 Y finalizacion.obtenerValor() = falso
+        mostrar: "Seleccione Modelo: A o B"
+        modeloNuevo.ingresarModelo()
+
+        si modeloNuevo.obtenerModelo() = "A" O modeloNuevo.obtenerModelo() = "a" entonces
+            sillas[i].asignoModelo("Modelo A")
+            mostrar: "Seleccione opcion de color:"
+            mostrar: "Opcion 1: Azul"
+            mostrar: "Opcion 2: Negro"
+            nuevaOpcion.definirOpcion()
+                si nuevaOpcion.obtenerOpcion() = 1 entonces
+                    sillas[i].asignoColor("Azul")
+                    nuevoStock.ingresarStock()
+                    sillas[i].asignoStock(nuevoStock)
+                sino si nuevaOpcion.obtenerOpcion() = 2 entonces
+                    sillas[i].asignoColor("Negro")
+                    nuevoStock.ingresarStock()
+                    sillas[i].asignoStock(nuevoStock)
+                sino
+                    mostrar: "La opcion elegida no es valida"
+                fin si
+        sino si modeloNuevo.obtenerModelo() = "B" O modeloNuevo.obtenerModelo() = "b" entonces
+            silla[i].asignoModelo("Modelo B")
+            mostrar: "Seleccione opcion de color:"
+            mostrar: "Opcion 1: Verde"
+            mostrar: "Opcion 2: Naranja"
+            nuevaOpcion.definirOpcion()
+                si nuevaOpcion.obtenerOpcion() = 1 entonces
+                    sillas[i].asignoColor("Verde")
+                    nuevoStock.ingresarStock()
+                    sillas[i].asignoStock(nuevoStock)
+                sino si nuevaOpcion.obtenerOpcion() = 2 entonces
+                    sillas[i].asignoColor("Naranja")
+                    nuevoStock.ingresarStock()
+                    sillas[i].asignoStock(nuevoStock)
+                sino
+                    mostrar: "La opcion elegida no es valida"
+                fin si
+        sino
+            mostrar: "El modelo no es valido"
+        fin si
+
+        mostrar: "¿Desea Finalizar el ingreso de Sillas?"
+        mostrar: "Opcion 1: Si"
+        mostrar: "Opcion 2: No"
+        nuevaOpcion.definirOpcion()
+        si nuevaOpcion.obtenerOpcion() = 1 entonces
+            finalizar.definirValor(verdadero)
+        sino
+            finalizar.definirValor(falso)
+        fin si
+    i = i + 1    
+    fin mientras
+fin metodo
+
+metodo Integer buscoSillas()
+    Modelo modeloNuevo nuevaInstancia Modelo()
+    Color colorNuevo nuevaInstancia Color()
+    Integer i nuevaInstancia Integer()
+    Integer posicion nuevaInstancia Integer()
+    Finalizar finalizacion nuevaInstancia Finalizar()
+
+
+    mostrar: "Ingrese Modelo:"
+    modeloNuevo.ingresarModelo()
+    mostrar: "ingrese Color"
+    colorNuevo.ingresarColor()
+
+    i = 1
+    finalizacion.definirValor(falso)
+
+    mientras i < 5 Y finalizacion = falso
+        si sillas[i].obtenerModelo() = modeloNuevo.obtenerModelo() Y sillas[i].obtenerColor() = colorNuevo.obtenerColor() entonces
+            finalizacion.definirValor(verdadero)
+            posicion = i
+        fin si
+        i = i + 1
+    fin mientras
+
+    retornar: sillas[posicion].obtengoStock()
+
+fin metodo
+
+fin clase
